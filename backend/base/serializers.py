@@ -66,11 +66,11 @@ class OrderSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
     def get_orderItems(self, obj):
-        items = obj.orderItem_set.all()
+        items = obj.orderitem_set.all()
         serializer = OrderItemSerializer(items, many=True)
         return serializer.data
 
-    def get_shippingAdress(self, obj):
+    def get_shippingAddress(self, obj):  # Corrected method name
         try:
             address = ShippingAddressSerializer(
                 obj.shippingAddress, many=False)
