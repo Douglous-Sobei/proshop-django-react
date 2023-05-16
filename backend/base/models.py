@@ -61,7 +61,7 @@ class OrderItem(models.Model):
     product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True)
     order = models.ForeignKey(Order, on_delete=models.SET_NULL, null=True)
     name = models.CharField(max_length=180, null=True, blank=True)
-    quantity = models.IntegerField(null=True, blank=True, default=0)
+    qty = models.IntegerField(null=True, blank=True, default=0)
     price = models.DecimalField(
         max_digits=8, decimal_places=2, null=True, blank=True)
     image = models.CharField(max_length=180, null=True, blank=True)
