@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import { Button, Col, Form, Row } from 'react-bootstrap';
+import React, { useState } from 'react';
+import { Button, Form } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import FormContainer from '../components/FormContainer';
 import CheckoutSteps from '../components/CheckoutSteps';
 import { saveShippingAddress } from '../actions/cartActions';
 
-function ShippingScren() {
+function ShippingScreen() {
 
   const history = useNavigate()
 
@@ -90,4 +90,4 @@ function ShippingScren() {
   );
 }
 
-export default ShippingScren;
+export default ShippingScreen;

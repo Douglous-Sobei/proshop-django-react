@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { Button, Col, Row, ListGroup, Image, Card } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, Link } from 'react-router-dom';
 import Message from '../components/Message';
 import CheckoutSteps from '../components/CheckoutSteps';
-import { createOrder } from '../actions/orderActions'
-import { ORDER_CREATE_RESET } from '../constants/orderConstants'
+import { createOrder } from '../actions/orderActions';
+import { ORDER_CREATE_RESET } from '../constants/orderConstants';
 
 function PlaceOrderScreen() {
 
@@ -29,11 +29,11 @@ function PlaceOrderScreen() {
     }
 
     useEffect(() => {
-        if (success) {
-            history(`/order/${order._id}`)
-            dispatch({ type: ORDER_CREATE_RESET })
+        if (success && order) {
+          history(`/order/${order._id}`);
+          dispatch({ type: ORDER_CREATE_RESET });
         }
-    }, [success, history])
+      }, [success, history, dispatch, order]);
 
     const placeOrder = () => {
         dispatch(createOrder({
