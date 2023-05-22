@@ -14,7 +14,7 @@ const reducer = combineReducers({
   userRegister: userRegisterReducer,
   userDetails: userDetailsReducer,
   userUpdateProfile: userUpdateProfileReducer,
-  orderCreate: orderCreateReducer
+  orderCreate: orderCreateReducer,
 
 });
 
