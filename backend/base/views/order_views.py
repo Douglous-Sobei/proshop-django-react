@@ -9,6 +9,7 @@ from base.serializers import ProductSerializer, OrderSerializer, ShippingAddress
 
 from rest_framework import status
 from datetime import datetime
+from django.utils import timezone
 
 
 @api_view(['POST'])
@@ -24,6 +25,7 @@ def addOrderItems(request):
     if orderItems and len(orderItems) == 0:
         return Response({'detail': 'No Order Items'}, status=status.HTTP_400_BAD_REQUEST)
     else:
+
         # (1) create order
         order = Order.objects.create(
             user=user,
@@ -46,6 +48,7 @@ def addOrderItems(request):
 
         for i in orderItems:
             product = Product.objects.get(_id=i['product'])
+
             item = OrderItem.objects.create(
                 product=product,
                 order=order,
@@ -66,6 +69,15 @@ def addOrderItems(request):
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
+def getMyOrders(request):
+    user = request.user
+    orders = user.order_set.all()
+    serializer = OrderSerializer(orders, many=True)
+    return Response(serializer.data)
+
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
 def getOrderById(request, pk):
 
     user = request.user
@@ -76,8 +88,7 @@ def getOrderById(request, pk):
             serializer = OrderSerializer(order, many=False)
             return Response(serializer.data)
         else:
-            Response({'detail': 'Not authorized to view this order'},
-                     status=status.HTTP_400_BAD_REQUEST)
+            return Response({'detail': 'Not authorized to view this order'}, status=status.HTTP_400_BAD_REQUEST)
     except:
         return Response({'detail': 'Order does not exist'}, status=status.HTTP_400_BAD_REQUEST)
 
@@ -86,8 +97,7 @@ def getOrderById(request, pk):
 @permission_classes([IsAuthenticated])
 def updateOrderToPaid(request, pk):
     order = Order.objects.get(_id=pk)
-
     order.isPaid = True
-    order.paidAt = datetime.now()
+    order.paidAt = timezone.now()  # Use timezone.now() instead of datetime.now()
     order.save()
     return Response(('Order was paid'))

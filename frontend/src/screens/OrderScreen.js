@@ -39,7 +39,7 @@ function OrderScreen() {
 
     useEffect(() => {
         if (!order || successPay || order._id !== Number(orderId)) {
-            dispatch({type:ORDER_PAY_RESET})
+            dispatch({ type: ORDER_PAY_RESET })
             dispatch(getOrderDetails(orderId));
         } else if (!order.isPaid) {
             if (!window.paypal) {
@@ -157,13 +157,19 @@ function OrderScreen() {
                                         </Row>
                                     </ListGroup.Item>
 
-                                    {!order.isPaid && sdkReady && (
+                                    {!order.isPaid && (
                                         <ListGroup.Item>
                                             {loadingPay && <Loader />}
-                                            <PayPalButton
-                                                amount={order.totalPrice}
-                                                onSuccess={successPaymentHandler}
-                                            />
+
+                                            {!sdkReady ? (
+                                                <Loader />
+                                            ) : (
+                                                <PayPalButton
+                                                    amount={order.totalPrice}
+                                                    onSuccess={successPaymentHandler}
+                                                />
+                                            )}
+                                            
                                         </ListGroup.Item>
                                     )}
                                 </ListGroup>

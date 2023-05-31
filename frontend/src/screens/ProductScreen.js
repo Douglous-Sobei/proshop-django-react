@@ -9,17 +9,17 @@ import { listProductDetails } from '../actions/productActions';
 
 function ProductScreen() {
   const [qty, setQty] = useState(1);
-  const { id } = useParams();
+  const { id: productId } = useParams();
   const history = useNavigate();
   const dispatch = useDispatch();
   const { error, loading, product } = useSelector((state) => state.productDetails);
 
   useEffect(() => {
-    dispatch(listProductDetails(id));
-  }, [dispatch, id]);
+    dispatch(listProductDetails(productId));
+  }, [dispatch, productId]);
 
   const addToCartHandler = () => {
-    history(`/cart/${id}?qty=${qty}`);
+    history(`/cart/${productId}?qty=${qty}`);
   };
 
   return (
