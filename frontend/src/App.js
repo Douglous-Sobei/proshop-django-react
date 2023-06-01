@@ -15,7 +15,7 @@ import PlaceOrderScreen from './screens/PlaceOrderScreen';
 import OrderScreen from './screens/OrderScreen';
 import UserListScreen from './screens/UserListScreen';
 
-function App() {
+function App () {
   return (
     <Router>
       <Header />

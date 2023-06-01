@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { LinkContainer } from 'react-router-bootstrap';
 import { logout } from '../actions/userActions';
 
-function Header() {
+function Header () {
   const userLogin = useSelector(state => state.userLogin);
   const { userInfo } = userLogin;
   const dispatch = useDispatch();
@@ -18,7 +18,8 @@ function Header() {
         bg='dark'
         variant='dark'
         expand='lg'
-        collapseOnSelect>
+        collapseOnSelect
+      >
         <Container>
           <LinkContainer to='/'>
             <Navbar.Brand>
@@ -30,27 +31,29 @@ function Header() {
             <Nav className='mr-auto'>
               <LinkContainer to='/cart'>
                 <Nav.Link>
-                  <i className='fas fa-shopping-cart'></i>Cart
+                  <i className='fas fa-shopping-cart' />Cart
                 </Nav.Link>
               </LinkContainer>
-              {userInfo ? (
-                <NavDropdown title={userInfo.name} id='username'>
-                  <LinkContainer to='/profile'>
-                    <NavDropdown.Item>
-                      Profile
+              {userInfo
+                ? (
+                  <NavDropdown title={userInfo.name} id='username'>
+                    <LinkContainer to='/profile'>
+                      <NavDropdown.Item>
+                        Profile
+                      </NavDropdown.Item>
+                    </LinkContainer>
+                    <NavDropdown.Item onClick={logoutHandler}>
+                      Logout
                     </NavDropdown.Item>
+                  </NavDropdown>
+                  )
+                : (
+                  <LinkContainer to='/login'>
+                    <Nav.Link>
+                      <i className='fas fa-user' />Login
+                    </Nav.Link>
                   </LinkContainer>
-                  <NavDropdown.Item onClick={logoutHandler}>
-                    Logout
-                  </NavDropdown.Item>
-                </NavDropdown>
-              ) : (
-                <LinkContainer to='/login'>
-                  <Nav.Link>
-                    <i className='fas fa-user'></i>Login
-                  </Nav.Link>
-                </LinkContainer>
-              )}
+                  )}
 
               {userInfo && userInfo.isAdmin && (
                 <NavDropdown title='Admin' id='adminmenu'>
