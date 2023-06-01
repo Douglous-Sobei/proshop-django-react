@@ -19,29 +19,29 @@ const HomeScreen = () => {
     <div>
       <h1>Latest Products</h1>
       {loading
-         ? (
-         <Loader />
-         )
-         : error
-           ? (
-           <Message variant='danger'>
-             {error}
-           </Message>
-           )
-           : (
-           <Row>
-             {products.map(product => (
+        ? (
+          <Loader />
+        )
+        : error
+          ? (
+            <Message variant='danger'>
+              {error}
+            </Message>
+          )
+          : (
+            <Row>
+              {products.map(product => (
                 <Col
                   key={product._id}
                   sm={12}
                   md={6}
                   lg={4}
                   xl={3}>
-                <Product product={product} />
+                  <Product product={product} />
                 </Col>
               ))}
-           </Row>
-           )}
+            </Row>
+          )}
     </div>
   );
 };
