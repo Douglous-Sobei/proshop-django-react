@@ -7,7 +7,7 @@ import FormContainer from '../components/FormContainer';
 import Loader from '../components/Loader';
 import Message from '../components/Message';
 
-function LoginScreen() {
+function LoginScreen () {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 

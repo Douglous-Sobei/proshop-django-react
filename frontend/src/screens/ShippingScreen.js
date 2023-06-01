@@ -6,14 +6,13 @@ import FormContainer from '../components/FormContainer';
 import CheckoutSteps from '../components/CheckoutSteps';
 import { saveShippingAddress } from '../actions/cartActions';
 
-function ShippingScreen() {
+function ShippingScreen () {
+  const history = useNavigate();
 
-  const history = useNavigate()
+  const cart = useSelector(state => state.cart);
+  const { shippingAddress } = cart;
 
-  const cart = useSelector(state => state.cart)
-  const { shippingAddress } = cart
-
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const [address, setAddress] = useState(shippingAddress.address);
   const [city, setCity] = useState(shippingAddress.city);
@@ -21,11 +20,10 @@ function ShippingScreen() {
   const [country, setCountry] = useState(shippingAddress.country);
 
   const submitHandler = (e) => {
-    e.preventDefault()
-    dispatch(saveShippingAddress({ address, city, postalCode, country }))
-    history('/payment')
-  }
-
+    e.preventDefault();
+    dispatch(saveShippingAddress({ address, city, postalCode, country }));
+    history('/payment');
+  };
 
   return (
     <FormContainer>
@@ -39,10 +37,9 @@ function ShippingScreen() {
             required
             type='text'
             placeholder='Enter address'
-            value={address ? address : ''}
+            value={address || ''}
             onChange={(e) => setAddress(e.target.value)}
-          >
-          </Form.Control>
+          />
         </Form.Group>
 
         <Form.Group controlId='city'>
@@ -51,10 +48,9 @@ function ShippingScreen() {
             required
             type='text'
             placeholder='Enter city'
-            value={city ? city : ''}
+            value={city || ''}
             onChange={(e) => setCity(e.target.value)}
-          >
-          </Form.Control>
+          />
         </Form.Group>
 
         <Form.Group controlId='postalCode'>
@@ -63,10 +59,9 @@ function ShippingScreen() {
             required
             type='text'
             placeholder='Enter postal code'
-            value={postalCode ? postalCode : ''}
+            value={postalCode || ''}
             onChange={(e) => setPostalCode(e.target.value)}
-          >
-          </Form.Control>
+          />
         </Form.Group>
 
         <Form.Group controlId='country'>
@@ -75,10 +70,9 @@ function ShippingScreen() {
             required
             type='text'
             placeholder='Enter country'
-            value={country ? country : ''}
+            value={country || ''}
             onChange={(e) => setCountry(e.target.value)}
-          >
-          </Form.Control>
+          />
         </Form.Group>
 
         <Button type='submit' variant='primary'>

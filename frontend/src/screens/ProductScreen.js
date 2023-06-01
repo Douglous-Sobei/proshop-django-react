@@ -7,7 +7,7 @@ import Loader from '../components/Loader';
 import Message from '../components/Message';
 import { listProductDetails } from '../actions/productActions';
 
-function ProductScreen() {
+function ProductScreen () {
   const [qty, setQty] = useState(1);
   const { id: productId } = useParams();
   const history = useNavigate();
@@ -30,11 +30,11 @@ function ProductScreen() {
       {loading
         ? (
           <Loader />
-        )
+          )
         : error
           ? (
             <Message variant='danger'>{error}</Message>
-          )
+            )
           : (
             <Row>
               <Col md={6}>
@@ -115,7 +115,7 @@ function ProductScreen() {
                 </Card>
               </Col>
             </Row>
-          )}
+            )}
     </div>
   );
 }

@@ -21,13 +21,13 @@ const HomeScreen = () => {
       {loading
         ? (
           <Loader />
-        )
+          )
         : error
           ? (
             <Message variant='danger'>
               {error}
             </Message>
-          )
+            )
           : (
             <Row>
               {products.map(product => (
@@ -36,12 +36,13 @@ const HomeScreen = () => {
                   sm={12}
                   md={6}
                   lg={4}
-                  xl={3}>
+                  xl={3}
+                >
                   <Product product={product} />
                 </Col>
               ))}
             </Row>
-          )}
+            )}
     </div>
   );
 };
