@@ -9,7 +9,7 @@ import Message from '../components/Message';
 import { USER_UPDATE_PROFILE_RESET } from '../constants/userConstants';
 import { listMyOrders } from '../actions/orderActions';
 
-function ProfileScreen () {
+function ProfileScreen() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -36,7 +36,7 @@ function ProfileScreen () {
     if (!userInfo) {
       navigate('/login');
     } else {
-      if (!user || !user.name || success) {
+      if (!user || !user.name || success || userInfo._id !== user._id) {
         dispatch({
           type: USER_UPDATE_PROFILE_RESET
         });
@@ -120,11 +120,11 @@ function ProfileScreen () {
         {loadingOrders
           ? (
             <Loader />
-            )
+          )
           : errorOrders
             ? (
               <Message variant='danger'>{errorOrders}</Message>
-              )
+            )
             : (
               <Table striped responsive className='table-sm'>
                 <thead>
@@ -146,7 +146,7 @@ function ProfileScreen () {
                       ? order.paidAt.substring(0, 10)
                       : (
                         <i className='fas fa-times' style={{ color: 'red' }} />
-                        )}
+                      )}
                     </td>
                     <td>
                       <LinkContainer to={`/order/${order._id}`}>
@@ -157,7 +157,7 @@ function ProfileScreen () {
                 ))}
                 <tbody />
               </Table>
-              )}
+            )}
       </Col>
     </Row>
   );
