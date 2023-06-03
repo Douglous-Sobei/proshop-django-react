@@ -4,14 +4,17 @@ import { useDispatch, useSelector } from 'react-redux';
 import { LinkContainer } from 'react-router-bootstrap';
 import Loader from '../components/Loader';
 import Message from '../components/Message';
-import { listUsers } from '../actions/userActions';
+import { listUsers, deleteUser } from '../actions/userActions';
 import { useNavigate } from 'react-router-dom';
 
-function UserListScreen () {
+function UserListScreen() {
   const dispatch = useDispatch();
 
   const userList = useSelector(state => state.userList);
   const { loading, error, users } = userList;
+
+  const userDelete = useSelector(state => state.userDelete);
+  const { success: successDelete } = userDelete;
 
   const userLogin = useSelector(state => state.userLogin);
   const { userInfo } = userLogin;
@@ -24,10 +27,12 @@ function UserListScreen () {
     } else {
       navigate('/login');
     }
-  }, [userInfo, dispatch, navigate]);
+  }, [userInfo, dispatch, navigate, successDelete]);
 
   const deleteHandler = (id) => {
-    console.log('DELETE:', id);
+    if (window.confirm('Are you sure you want to delete this user?')){
+      dispatch(deleteUser(id))
+    }
   };
 
   return (
@@ -58,10 +63,10 @@ function UserListScreen () {
                     <td>{user.isAdmin
                       ? (
                         <i className='fas fa-check' style={{ color: 'green' }} />
-                        )
+                      )
                       : (
                         <i className='fas fa-check' style={{ color: 'red' }} />
-                        )}
+                      )}
                     </td>
                     <td>
                       <LinkContainer to={`/admin/user/${user._id}`}>
@@ -78,7 +83,7 @@ function UserListScreen () {
                 ))}
               </tbody>
             </Table>
-            )}
+          )}
     </div>
   );
 }
