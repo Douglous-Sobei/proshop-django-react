@@ -50,7 +50,7 @@ function UserListScreen() {
                   <th>Name</th>
                   <th>Email</th>
                   <th>Admin</th>
-                  <th />
+                  <th></th>
                 </tr>
               </thead>
 
