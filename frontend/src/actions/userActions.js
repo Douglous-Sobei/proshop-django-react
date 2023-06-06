@@ -28,7 +28,7 @@ import {
 
   USER_UPDATE_REQUEST,
   USER_UPDATE_SUCCESS,
-  USER_UPDATE_FAIL,
+  USER_UPDATE_FAIL
 } from '../constants/userConstants';
 
 import { ORDER_LIST_MY_RESET } from '../constants/orderConstants';
@@ -183,7 +183,7 @@ export const listUsers = () => async (dispatch, getState) => {
       }
     };
     const { data } = await axios.get(
-      `/api/users/`,
+      '/api/users/',
       config
     );
     dispatch({
@@ -255,14 +255,13 @@ export const updateUser = (user) => async (dispatch, getState) => {
     );
 
     dispatch({
-      type: USER_UPDATE_SUCCESS,
+      type: USER_UPDATE_SUCCESS
     });
 
     dispatch({
       type: USER_DETAILS_SUCCESS,
       payload: data
     });
-
   } catch (error) {
     dispatch({
       type: USER_UPDATE_FAIL,
