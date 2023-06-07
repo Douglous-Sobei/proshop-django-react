@@ -11,26 +11,25 @@ function SearchBox() {
   const submitHandler = (e) => {
     e.preventDefault();
     if (keyword) {
-      navigate(`/?keyword=${keyword}`);
+      navigate(`/?keyword=${keyword}&page=1`);
     } else {
       navigate(pathname);
     }
   };
 
   return (
-    <div style={{ display: 'inline-block' }}>
-      <Form onSubmit={submitHandler}>
-        <Form.Control
-          type='text'
-          name='q'
-          onChange={(e) => setKeyword(e.target.value)}
-          className='mr-sm-2 ml-sm-5'
-        />
-        <Button type='submit' variant='outline-success' className='p-2'>
-          Submit
-        </Button>
-      </Form>
-    </div>
+    <Form onSubmit={submitHandler} style={{ display: 'inline-block' }}>
+      <Form.Control
+        type="text"
+        name="q"
+        onChange={(e) => setKeyword(e.target.value)}
+        className="mr-sm-2"
+        style={{ display: 'inline-block' }}
+      />
+      <Button type="submit" variant="outline-success" className="p-2" style={{ display: 'inline-block' }}>
+        Submit
+      </Button>
+    </Form>
   );
 }
 

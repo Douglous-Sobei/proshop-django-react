@@ -27,13 +27,21 @@ import {
   PRODUCT_CREATE_REVIEW_RESET
 } from '../constants/productConstants';
 
-export const productListReducer = (state = { loading: true, products: [] }, action) => {
+export const productListReducer = (
+  state = { loading: true, products: [], has_next: false, has_previous: false },
+  action
+) => {
   switch (action.type) {
     case PRODUCT_LIST_REQUEST:
       return { loading: true, products: [] };
 
     case PRODUCT_LIST_SUCCESS:
-      return { loading: false, products: action.payload };
+      return {
+        loading: false,
+        products: action.payload.products,
+        page: action.payload.page,
+        pages: action.payload.pages,
+      };
 
     case PRODUCT_LIST_FAIL:
       return { loading: false, error: action.payload };
