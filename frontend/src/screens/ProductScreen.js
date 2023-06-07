@@ -24,7 +24,7 @@ function ProductScreen() {
   const userLogin = useSelector(state => state.userLogin)
   const { userInfo } = userLogin
 
-  const productReviewCreate = useSelector(state => state.productReviewCreate) || {}; // Modified line
+  const productReviewCreate = useSelector(state => state.productReviewCreate); // Modified line
   const {
     loading: loadingProductReview = false, // Modified line
     error: errorProductReview,
@@ -220,7 +220,6 @@ function ProductScreen() {
               </Row>
             </div>
           )
-
       }
     </div>
   )

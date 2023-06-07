@@ -25,10 +25,10 @@ import {
   PRODUCT_CREATE_REVIEW_FAIL
 } from '../constants/productConstants';
 
-export const listProducts = () => async (dispatch) => {
+export const listProducts = (keyword = '') => async (dispatch) => {
   try {
     dispatch({ type: PRODUCT_LIST_REQUEST });
-    const { data } = await axios.get('/api/products/');
+    const { data } = await axios.get(`/api/products${keyword}`);
     dispatch({
       type: PRODUCT_LIST_SUCCESS,
       payload: data
@@ -187,9 +187,9 @@ export const createProductReview = (productId, review) => async (dispatch, getSt
     };
 
     const { data } = await axios.post(
-          `/api/products/${productId}/reviews/`,
-          review,
-          config
+      `/api/products/${productId}/reviews/`,
+      review,
+      config
     );
     dispatch({
       type: PRODUCT_CREATE_REVIEW_SUCCESS,

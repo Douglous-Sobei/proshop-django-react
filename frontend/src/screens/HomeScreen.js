@@ -5,13 +5,16 @@ import Product from '../components/Product';
 import Loader from '../components/Loader';
 import Message from '../components/Message';
 import { listProducts } from '../actions/productActions';
+import { useLocation } from 'react-router-dom';
 
 const HomeScreen = () => {
   const dispatch = useDispatch();
+  const location = useLocation();
+  let keyword = location.search
 
   useEffect(() => {
-    dispatch(listProducts());
-  }, [dispatch]);
+    dispatch(listProducts(keyword));
+  }, [dispatch, keyword]);
 
   const { error, loading, products } = useSelector(state => state.productList);
 

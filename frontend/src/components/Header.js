@@ -2,9 +2,10 @@ import React from 'react';
 import { Container, Nav, NavDropdown, Navbar } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { LinkContainer } from 'react-router-bootstrap';
+import SearchBox from './SearchBox'
 import { logout } from '../actions/userActions';
 
-function Header () {
+function Header() {
   const userLogin = useSelector(state => state.userLogin);
   const { userInfo } = userLogin;
   const dispatch = useDispatch();
@@ -26,8 +27,10 @@ function Header () {
               ProShop
             </Navbar.Brand>
           </LinkContainer>
+
           <Navbar.Toggle aria-controls='basic-navbar-nav' />
           <Navbar.Collapse id='basic-navbar-nav'>
+            <SearchBox />
             <Nav className='mr-auto'>
               <LinkContainer to='/cart'>
                 <Nav.Link>
@@ -46,14 +49,14 @@ function Header () {
                       Logout
                     </NavDropdown.Item>
                   </NavDropdown>
-                  )
+                )
                 : (
                   <LinkContainer to='/login'>
                     <Nav.Link>
                       <i className='fas fa-user' />Login
                     </Nav.Link>
                   </LinkContainer>
-                  )}
+                )}
 
               {userInfo && userInfo.isAdmin && (
                 <NavDropdown title='Admin' id='adminmenu'>
