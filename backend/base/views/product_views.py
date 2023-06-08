@@ -3,6 +3,8 @@ from django.shortcuts import render
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from rest_framework.response import Response
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from math import ceil
 
 from base.models import Product, Review
 from base.serializers import ProductSerializer
@@ -13,12 +15,33 @@ from rest_framework import status
 # Get Products
 @api_view(["GET"])
 def getProducts(request):
-    query = request.query_params.get('keyword')
+    query = request.query_params.get('keyword', '')
     print('query:', query)
-    if query is None:
-        query = ''
 
-    products = Product.objects.filter(name__icontains=query)
+    products = Product.objects.filter(
+        name__icontains=query).order_by('-createAt')
+
+    page = request.query_params.get('page', 1)
+    paginator = Paginator(products, 3)
+
+    try:
+        products = paginator.page(page)
+    except PageNotAnInteger:
+        products = paginator.page(1)
+    except EmptyPage:
+        products = paginator.page(paginator.num_pages)
+
+    serializer = ProductSerializer(products, many=True)
+    return Response({
+        'products': serializer.data,
+        'page': products.number,
+        'pages': paginator.num_pages
+    })
+
+
+@api_view(["GET"])
+def getTopProducts(request):
+    products = Product.objects.filter(rating__gt=4).order_by('-rating')[0:5]
     serializer = ProductSerializer(products, many=True)
     return Response(serializer.data)
 

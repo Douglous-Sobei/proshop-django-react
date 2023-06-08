@@ -4,7 +4,8 @@ import { Row, Col } from 'react-bootstrap';
 import Product from '../components/Product';
 import Loader from '../components/Loader';
 import Message from '../components/Message';
-import Paginate from '../components/Paginate'
+import Paginate from '../components/Paginate';
+import ProductCarousel from '../components/ProductCarousel'
 import { listProducts } from '../actions/productActions';
 import { useLocation } from 'react-router-dom';
 
@@ -21,6 +22,7 @@ const HomeScreen = () => {
 
   return (
     <div>
+      <ProductCarousel />
       <h1>Latest Products</h1>
       {loading
         ? (
@@ -35,6 +37,7 @@ const HomeScreen = () => {
           : (
             <div>
               <Row>
+
                 {products.map(product => (
                   <Col
                     key={product._id}
@@ -47,7 +50,7 @@ const HomeScreen = () => {
                   </Col>
                 ))}
               </Row>
-              <Paginate pages={pages} page={page} keyword={keyword}/>
+              <Paginate pages={pages} page={page} keyword={keyword} />
             </div>
           )}
     </div>
