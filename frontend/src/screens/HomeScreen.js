@@ -5,9 +5,9 @@ import Product from '../components/Product';
 import Loader from '../components/Loader';
 import Message from '../components/Message';
 import Paginate from '../components/Paginate';
-import ProductCarousel from '../components/ProductCarousel'
 import { listProducts } from '../actions/productActions';
 import { useLocation } from 'react-router-dom';
+import ProductCarousel from '../components/ProductCarousel'
 
 const HomeScreen = () => {
   const dispatch = useDispatch();
@@ -22,7 +22,7 @@ const HomeScreen = () => {
 
   return (
     <div>
-      <ProductCarousel />
+      {keyword && <ProductCarousel />}
       <h1>Latest Products</h1>
       {loading
         ? (
