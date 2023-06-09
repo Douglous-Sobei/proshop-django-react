@@ -43,6 +43,8 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "rest_framework",
     "corsheaders",
+    "storages",
+
     "base.apps.BaseConfig",
 ]
 
@@ -201,3 +203,12 @@ CORS_ALLOW_ALL_ORIGINS = True
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+STORAGES = {"default": {"BACKEND": "storages.backends.s3boto3.S3Boto3Storage"}}
+
+AWS_QUERYSTRING_AUTH = False
+
+AWS_ACCESS_KEY_ID = "AKIAYOXNULY4IX4FFPNJ"
+AWS_SECRET_ACCESS_KEY = "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"
+
+AWS_STORAGE_BUCKET_NAME = "proshop-bucket-products"
