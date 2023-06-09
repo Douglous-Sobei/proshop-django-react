@@ -19,7 +19,7 @@ def getProducts(request):
     print('query:', query)
 
     products = Product.objects.filter(
-        name__icontains=query).order_by('-createAt')
+        name__icontains=query).order_by('createAt')
 
     page = request.query_params.get('page', 1)
     paginator = Paginator(products, 3)
